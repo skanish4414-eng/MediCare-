@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare+ — Health &amp; Doctor Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- App Header -->
+  <header>
+    <a href="/" class="brand">
+      <div class="brand-icon"><i data-lucide="shield-check"></i></div>
+      <span>MediCare+</span>
+    </a>
+    <div class="nav-actions">
+      <button class="btn btn-primary" onclick="openModal('uploadModal')" aria-label="Upload Report" title="Upload Report">
+        <i data-lucide="upload-cloud"></i>
+        <span>Upload Report</span>
+      </button>
+      <button class="btn btn-outline" onclick="openModal('addMedModal')" aria-label="Add Medicine" title="Add Medicine">
+        <i data-lucide="pill"></i>
+        <span class="btn-text-hide">Add Med</span>
+      </button>
+      <button id="symptomGuideBtn" class="btn btn-outline" onclick="openModal('symptomGuideModal')" aria-label="Open health assistant" title="Health Assistant">
+        <i data-lucide="sparkles"></i>
+        <span class="btn-text-hide">Health Assistant</span>
+      </button>
+      <button id="authBtn" class="btn btn-outline" onclick="handleAuthClick()">
+        <i data-lucide="user"></i>
+        <span id="authBtnText">Login</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Public landing page: shown before sign-in -->
+  <section id="homePage" class="home-page">
+    <div class="home-hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR HEALTH, A LITTLE MORE CONNECTED</div>
+        <h1>Care that keeps<br><span>you connected.</span></h1>
+        <p class="hero-description">MediCare+ brings your health notes, doctor discovery, and appointment requests together in one friendly demo space.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-hero" onclick="openModal('loginModal')"><i data-lucide="lock-keyhole"></i> Explore MediCare+ <i data-lucide="arrow-up-right" class="hero-arrow"></i></button>
+          <button class="btn btn-outline btn-hero btn-hero-secondary" onclick="openModal('symptomGuideModal')"><i data-lucide="sparkles"></i> Health assistant</button>
+          <a class="hero-text-link" href="#homeFeatures">Explore features <i data-lucide="arrow-down"></i></a>
+        </div>
+        <div class="hero-trust-row"><span><i data-lucide="folder-check"></i> Organized records</span><span><i data-lucide="calendar-check"></i> Easy to review</span><span><i data-lucide="file-text"></i> Consultation-ready summaries</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of a digital medical records dashboard">
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+        <div class="visual-glow"></div>
+        <div class="health-card card-top"><span class="mini-icon mint"><i data-lucide="shield-check"></i></span><div><strong>Personal health vault</strong><small>Keep your history together</small></div><i data-lucide="check-circle-2" class="card-check"></i></div>
+        <div class="health-card card-main"><div class="card-main-head"><span class="mini-icon blue"><i data-lucide="activity"></i></span><div><strong>Health overview</strong><small>Your records, at a glance</small></div><span class="preview-pill">PREVIEW</span></div><div class="preview-metrics"><div><span class="metric-symbol coral"><i data-lucide="heart-pulse"></i></span><small>Cardiac</small><b>Reports</b></div><div><span class="metric-symbol amber"><i data-lucide="droplet"></i></span><small>Blood sugar</small><b>Lab notes</b></div><div><span class="metric-symbol violet"><i data-lucide="gauge"></i></span><small>Blood pressure</small><b>History</b></div></div><div class="preview-list"><div><span class="preview-file"><i data-lucide="file-text"></i></span><div><b>Medical reports</b><small>Organized by category</small></div><i data-lucide="chevron-right"></i></div><div><span class="preview-file teal"><i data-lucide="clipboard-list"></i></span><div><b>Medication notes</b><small>Current and past entries</small></div><i data-lucide="chevron-right"></i></div></div></div>
+        <div class="health-card card-bottom"><span class="mini-icon purple"><i data-lucide="calendar-clock"></i></span><div><strong>Ready for your next visit</strong><small>Build a clearer consultation summary</small></div></div>
+        <div class="floating-plus plus-one">+</div><div class="floating-plus plus-two">✳</div>
+      </div>
+    </div>
+    <div class="home-proof"><div><strong>One space</strong><span>for your health records</span></div><div><strong>Find a doctor</strong><span>search by doctor ID</span></div><div><strong>Request a visit</strong><span>keep a local appointment list</span></div></div>
+    <section id="homeFeatures" class="home-features">
+      <div class="section-heading"><span class="section-kicker">BUILT AROUND YOUR NEEDS</span><h2>A more organized way to manage your health history.</h2><p>Spend less time searching through files and more time preparing for the conversations that matter.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-icon feature-blue"><i data-lucide="folder-open"></i></span><h3>Medical records, together</h3><p>Keep report notes grouped by cardiac, blood sugar, blood pressure, orthopedic, and general health categories.</p></article>
+        <article class="feature-card"><span class="feature-icon feature-teal"><i data-lucide="clipboard-list"></i></span><h3>Medication history</h3><p>Record medication details and distinguish current entries from past entries for easier review.</p></article>
+        <article class="feature-card"><span class="feature-icon feature-violet"><i data-lucide="file-check-2"></i></span><h3>Consultation summaries</h3><p>Bring key notes together in a readable summary you can review or print before an appointment.</p></article>
+        <article class="feature-card"><span class="feature-icon feature-teal"><i data-lucide="map-pin"></i></span><h3>Doctor discovery</h3><p>Browse demo nearby listings or search directly by a doctor's ID, then request an appointment.</p></article>
+      </div>
+    </section>
+    <section class="home-cta"><div><span class="section-kicker">START WITH A CLEARER PICTURE</span><h2>Your health deserves a connected home.</h2><p>Open the MediCare+ demo to organize health notes and discover demo doctors.</p></div><button class="btn btn-primary btn-hero" onclick="openModal('loginModal')">Explore MediCare+ <i data-lucide="arrow-right"></i></button></section>
+    <footer class="home-footer"><a href="/" class="brand"><span class="brand-icon"><i data-lucide="shield-check"></i></span><span>MediCare+</span></a><p>Demo only. Not a substitute for professional medical advice or a real care service.</p><span>© 2026 MediCare+</span></footer>
+  </section>
+
+  <main id="dashboardApp" class="container dashboard-app">
+    <section id="doctorWorkspace" class="doctor-workspace" aria-label="Doctor dashboard">
+      <aside class="doctor-sidebar">
+        <div class="doctor-sidebar-heading">
+          <span class="doctor-sidebar-mark"><i data-lucide="stethoscope"></i></span>
+          <div><strong>Doctor dashboard</strong><small>Patient medical records</small></div>
+        </div>
+        <nav class="doctor-nav" aria-label="Patient medical history sections">
+          <button class="doctor-nav-item active" data-doctor-page="overview" onclick="doctorNavigate('overview', this)"><i data-lucide="layout-dashboard"></i><span>Medical Overview</span></button>
+          <button class="doctor-nav-item" data-doctor-page="personal-information" onclick="doctorNavigate('personal-information', this)"><i data-lucide="contact-round"></i><span>Personal Information</span></button>
+          <button class="doctor-nav-item" data-doctor-page="vitals" onclick="doctorNavigate('vitals', this)"><i data-lucide="heart-pulse"></i><span>Vitals &amp; Health Parameters</span></button>
+          <button class="doctor-nav-item" data-doctor-page="medical-history" onclick="doctorNavigate('medical-history', this)"><i data-lucide="folder-heart"></i><span>Complete Medical History</span></button>
+          <button class="doctor-nav-item" data-doctor-page="diagnoses" onclick="doctorNavigate('diagnoses', this)"><i data-lucide="clipboard-plus"></i><span>Previous Diagnoses</span></button>
+          <button class="doctor-nav-item" data-doctor-page="medicines" onclick="doctorNavigate('medicines', this)"><i data-lucide="pill"></i><span>Current &amp; Previous Medicines</span></button>
+          <button class="doctor-nav-item" data-doctor-page="lab-reports" onclick="doctorNavigate('lab-reports', this)"><i data-lucide="flask-conical"></i><span>Blood &amp; Laboratory Reports</span></button>
+          <button class="doctor-nav-item" data-doctor-page="imaging" onclick="doctorNavigate('imaging', this)"><i data-lucide="scan-line"></i><span>X-Ray, CT, MRI &amp; Imaging</span></button>
+          <button class="doctor-nav-item" data-doctor-page="cardiac" onclick="doctorNavigate('cardiac', this)"><i data-lucide="activity"></i><span>ECG &amp; Cardiac Reports</span></button>
+          <button class="doctor-nav-item" data-doctor-page="allergies" onclick="doctorNavigate('allergies', this)"><i data-lucide="triangle-alert"></i><span>Allergies &amp; Reactions</span></button>
+          <button class="doctor-nav-item" data-doctor-page="surgeries" onclick="doctorNavigate('surgeries', this)"><i data-lucide="hospital"></i><span>Surgeries &amp; Hospitalizations</span></button>
+          <button class="doctor-nav-item" data-doctor-page="vaccinations" onclick="doctorNavigate('vaccinations', this)"><i data-lucide="syringe"></i><span>Vaccination History</span></button>
+          <button class="doctor-nav-item" data-doctor-page="consultations" onclick="doctorNavigate('consultations', this)"><i data-lucide="stethoscope"></i><span>Previous Consultations</span></button>
+          <button class="doctor-nav-item" data-doctor-page="reports" onclick="doctorNavigate('reports', this)"><i data-lucide="files"></i><span>Prescriptions &amp; Doctor Reports</span></button>
+          <button class="doctor-nav-item" data-doctor-page="timeline" onclick="doctorNavigate('timeline', this)"><i data-lucide="history"></i><span>Medical Timeline</span></button>
+        </nav>
+      </aside>
+
+      <div class="doctor-main doctor-record-main">
+        <div class="doctor-topbar">
+          <div><span class="doctor-breadcrumb">MediCare+ <i data-lucide="chevron-right"></i> Patient records</span><h1 id="doctorPageTitle">Medical Overview</h1></div>
+          <div class="doctor-profile"><span class="doctor-profile-avatar" id="doctorAvatar">D</span><span><strong id="doctorName">Doctor</strong><small id="doctorCredentialsDisplay">Doctor account</small></span></div>
+        </div>
+        <section class="doctor-patient-header" aria-label="Patient profile">
+          <div class="doctor-patient-header-top">
+            <div><span class="doctor-eyebrow">PATIENT PROFILE</span><div class="doctor-id-display"><span>Patient ID</span><strong id="doctorPatientId">Enter an ID to search</strong></div></div>
+          </div>
+          <form id="doctorPatientSearchForm" class="doctor-patient-search" onsubmit="searchDoctorPatient(event)">
+            <label for="doctorPatientSearch">Find patient records by ID</label>
+            <div><i data-lucide="search"></i><input id="doctorPatientSearch" type="search" placeholder="Enter patient ID" autocomplete="off" required><button type="submit" class="doctor-primary-action">Search</button></div>
+            <p id="doctorPatientSearchMessage" aria-live="polite">Search this browser’s patient record to load its profile and reports.</p>
+          </form>
+          <div class="doctor-profile-fields">
+            <div><span>Patient name</span><strong id="doctorPatientName">Not recorded</strong></div>
+            <div><span>Age / Date of birth</span><strong id="doctorPatientAge">Not recorded</strong></div>
+            <div><span>Gender</span><strong id="doctorPatientGender">Not recorded</strong></div>
+            <div><span>Blood group</span><strong id="doctorPatientBloodGroup">Not recorded</strong></div>
+            <div><span>Contact information</span><strong>Not recorded</strong></div>
+            <div><span>Emergency contact</span><strong id="doctorPatientEmergencyContact">Not recorded</strong></div>
+            <div><span>Last consultation</span><strong id="doctorLastConsultation">Not recorded</strong></div>
+          </div>
+        </section>
+        <div class="doctor-record-toolbar"><p id="doctorSectionDescription">Search by patient ID to load reports.</p></div>
+        <section id="doctorRecordContent" class="doctor-record-content" aria-live="polite"></section>
+      </div>
+    </section>
+    <div id="patientWorkspace">
+    <div class="doctor-return-bar"><span><i data-lucide="info"></i> Viewing the local patient vault</span><button onclick="doctorReturnToWorkspace()">Back to doctor dashboard <i data-lucide="arrow-left"></i></button></div>
+      <!-- Patient Identity Card -->
+    <section class="patient-card">
+      <div class="patient-info">
+        <div class="patient-avatar" id="avatarLetter">S</div>
+        <div class="patient-meta">
+          <h2 id="patientNameDisplay">Not provided</h2>
+          <div class="patient-badges">
+            <span class="id-tag">Patient ID: <strong id="patientIdDisplay">PH_LOCAL_0001</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="health-illustration" aria-hidden="true">
+        <svg viewBox="0 0 120 120" focusable="false">
+          <defs>
+            <linearGradient id="healthMarkGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#38bdf8"></stop>
+              <stop offset="1" stop-color="#2dd4bf"></stop>
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="52" fill="url(#healthMarkGradient)" opacity=".16"></circle>
+          <path d="M60 17 94 30v25c0 23-14 39-34 49C40 94 26 78 26 55V30z" fill="url(#healthMarkGradient)"></path>
+          <path d="M32 61h18l8-17 11 34 8-17h12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <div>
+        <button class="btn btn-outline" style="color:white; border-color:rgba(255,255,255,0.3); background: transparent;" onclick="generateConsultSummary()">
+          <i data-lucide="file-text"></i>
+          <span>Doctor Consultation Summary</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="patient-demographics" aria-label="Patient details">
+      <div class="patient-demographics-heading">
+        <div><span class="section-kicker">PATIENT DETAILS</span><h2>Profile summary</h2></div>
+      </div>
+      <div class="patient-demographics-grid">
+        <div><span>Age</span><strong id="patientAge">Not recorded</strong></div>
+        <div><span>Blood group</span><strong id="patientBloodGroup">Not recorded</strong></div>
+        <div><span>Emergency contact</span><strong id="patientEmergencyContact">Not recorded</strong></div>
+        <div><span>Last consultation</span><strong id="patientLastConsultation">Not recorded</strong></div>
+      </div>
+    </section>
+
+    <section class="doctor-directory" aria-labelledby="doctorDirectoryTitle">
+      <div class="doctor-directory-heading">
+        <div>
+          <span class="section-kicker">DOCTOR DISCOVERY</span>
+          <h2 id="doctorDirectoryTitle">Find care that fits</h2>
+          <p>Search a doctor by ID or browse the nearby demo directory.</p>
+        </div>
+      </div>
+      <form class="doctor-directory-search" onsubmit="searchDoctorDirectory(event)">
+        <label class="sr-only" for="doctorDirectorySearch">Search doctor by ID</label>
+        <i data-lucide="search"></i>
+        <input id="doctorDirectorySearch" type="search" class="form-input" placeholder="Search by Doctor ID (e.g. DR_LOCAL_0001)" autocomplete="off" required>
+        <button class="btn btn-primary" type="submit">Find doctor</button>
+        <button class="btn btn-outline" type="button" onclick="showNearbyDoctors()">Nearby doctors</button>
+      </form>
+      <p id="doctorDirectoryMessage" class="directory-message" role="status" aria-live="polite">Browse the demo directory or enter a doctor ID.</p>
+      <div id="doctorDirectoryResults" class="doctor-directory-grid"></div>
+      <div class="appointment-panel">
+        <div class="appointment-panel-heading">
+          <span class="appointment-panel-icon"><i data-lucide="calendar-plus"></i></span>
+          <div><h3>Request an appointment</h3><p>Requests are saved in this browser only; they are not sent to a clinic.</p></div>
+        </div>
+        <form id="appointmentForm" class="appointment-form" onsubmit="requestAppointment(event)">
+          <div class="form-group">
+            <label class="form-label" for="appointmentDoctor">Choose a doctor</label>
+            <select id="appointmentDoctor" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appointmentDateTime">Preferred date and time</label>
+            <input id="appointmentDateTime" class="form-input" type="datetime-local" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appointmentReason">Note (optional)</label>
+            <input id="appointmentReason" class="form-input" maxlength="160" placeholder="A short note for your own reminder">
+          </div>
+          <button class="btn btn-primary" type="submit"><i data-lucide="calendar-check"></i> Save request</button>
+        </form>
+        <p id="appointmentMessage" class="directory-message" role="status" aria-live="polite"></p>
+        <div id="patientAppointments" class="patient-appointments"></div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('all-records', this)">
+        <i data-lucide="folder-archive"></i> All Medical History
+      </button>
+      <button class="tab-btn" onclick="switchTab('medicines', this)">
+        <i data-lucide="clipboard-list"></i> Medication Tracker
+      </button>
+      <button class="tab-btn" onclick="switchTab('cardiac-view', this)">
+        <i data-lucide="heart-pulse"></i> Cardiac Vault
+      </button>
+      <button class="tab-btn" onclick="switchTab('sugar-view', this)">
+        <i data-lucide="activity"></i> Sugar & Diabetes
+      </button>
+      <button class="tab-btn" onclick="switchTab('bp-view', this)">
+        <i data-lucide="gauge"></i> Blood Pressure
+      </button>
+      <button class="tab-btn" onclick="switchTab('ortho-view', this)">
+        <i data-lucide="bone"></i> Orthopedic
+      </button>
+    </nav>
+
+    <section id="patientInsights" class="patient-insights" aria-label="Patient health charts"></section>
+
+    <!-- Category Highlight Metric Cards -->
+    <div class="stats-grid">
+      <div class="stat-card cardiac-border" onclick="filterByCategory('Cardiac')">
+        <div class="stat-title">
+          <span>CARDIAC CARE</span>
+          <i data-lucide="heart-pulse" style="color:var(--cardiac); width:18px;"></i>
+        </div>
+        <div class="stat-value" id="cardiacCount">0 Records</div>
+        <small>ECG, Echo, Lipid profiles</small>
+      </div>
+
+      <div class="stat-card sugar-border" onclick="filterByCategory('Sugar')">
+        <div class="stat-title">
+          <span>BLOOD SUGAR</span>
+          <i data-lucide="activity" style="color:var(--sugar); width:18px;"></i>
+        </div>
+        <div class="stat-value" id="sugarCount">0 Records</div>
+        <small>HbA1c, Fasting, Post Prandial</small>
+      </div>
+
+      <div class="stat-card bp-border" onclick="filterByCategory('BP')">
+        <div class="stat-title">
+          <span>BLOOD PRESSURE</span>
+          <i data-lucide="gauge" style="color:var(--bp); width:18px;"></i>
+        </div>
+        <div class="stat-value" id="bpCount">0 Records</div>
+        <small>Hypertension, Ambulatory BP</small>
+      </div>
+
+      <div class="stat-card ortho-border" onclick="filterByCategory('Ortho')">
+        <div class="stat-title">
+          <span>ORTHOPEDIC</span>
+          <i data-lucide="bone" style="color:var(--ortho); width:18px;"></i>
+        </div>
+        <div class="stat-value" id="orthoCount">0 Records</div>
+        <small>X-Rays, Joint assessments</small>
+      </div>
+    </div>
+
+    <!-- TAB 1: ALL RECORDS -->
+    <section id="tab-all-records" class="tab-content active">
+      <div class="filter-bar">
+        <div class="category-filter" id="filterPills">
+          <button class="chip-btn active" onclick="filterRecords('all', this)">All Documents</button>
+          <button class="chip-btn" onclick="filterRecords('Cardiac', this)">Cardiac</button>
+          <button class="chip-btn" onclick="filterRecords('Sugar', this)">Blood Sugar</button>
+          <button class="chip-btn" onclick="filterRecords('BP', this)">Blood Pressure</button>
+          <button class="chip-btn" onclick="filterRecords('Ortho', this)">Orthopedic</button>
+        </div>
+      </div>
+      <div class="records-grid" id="recordsContainer"></div>
+    </section>
+
+    <!-- TAB 2: MEDICATIONS (ACTIVE & PREVIOUS) -->
+    <section id="tab-medicines" class="tab-content">
+      <div class="filter-bar">
+        <h3>Comprehensive Medication History</h3>
+        <button class="btn btn-primary" onclick="openModal('addMedModal')">
+          <i data-lucide="plus"></i> Add New Medicine
+        </button>
+      </div>
+      <div class="meds-split-container">
+        <div class="med-section-card">
+          <div class="med-section-title">
+            <i data-lucide="check-circle-2" style="color: #16a34a;"></i>
+            <span>Current medicines</span>
+          </div>
+          <div id="activeMedsContainer"></div>
+        </div>
+        <div class="med-section-card">
+          <div class="med-section-title">
+            <i data-lucide="history" style="color: var(--slate-600);"></i>
+            <span>Past medication entries</span>
+          </div>
+          <div id="pastMedsContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUSED CATEGORY TABS -->
+    <section id="tab-cardiac-view" class="tab-content">
+      <h3 style="margin-bottom:1rem;">Cardiac & Heart History</h3>
+      <div class="records-grid" id="cardiacSpecialGrid"></div>
+    </section>
+    <section id="tab-sugar-view" class="tab-content">
+      <h3 style="margin-bottom:1rem;">Diabetes & Glucose Records</h3>
+      <div class="records-grid" id="sugarSpecialGrid"></div>
+    </section>
+    <section id="tab-bp-view" class="tab-content">
+      <h3 style="margin-bottom:1rem;">Blood Pressure & Hypertension Logs</h3>
+      <div class="records-grid" id="bpSpecialGrid"></div>
+    </section>
+    <section id="tab-ortho-view" class="tab-content">
+      <h3 style="margin-bottom:1rem;">Bone & Joint Orthopedic History</h3>
+      <div class="records-grid" id="orthoSpecialGrid"></div>
+    </section>
+    </div>
+  </main>
+
+  <!-- MODAL: LOGIN -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Sign in to MediCare+</h3>
+        <button class="close-btn" onclick="closeModal('loginModal')"><i data-lucide="x"></i></button>
+      </div>
+      <form onsubmit="handleLoginSubmit(event)">
+        <p id="loginMessage" style="color:var(--slate-600); margin:0 0 1rem;">Demo sign-in: patient@example.com or doctor@example.com / pass123. Choose an account type. This page does not verify accounts; do not enter sensitive health information.</p>
+        <div class="form-group">
+          <label class="form-label" for="authRole">Sign in as</label>
+          <select id="authRole" class="form-select">
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="authName">Full Name</label>
+          <input type="text" id="authName" class="form-input" required value="Patient" placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="authEmail">Email</label>
+          <input type="email" id="authEmail" class="form-input" required value="patient@example.com" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="authPin">Password</label>
+          <input type="password" id="authPin" class="form-input" required value="pass123" autocomplete="current-password" />
+        </div>
+        <div class="form-group" id="loginPatientIdGroup" hidden>
+          <label class="form-label" for="authPatientId">Patient ID to open (optional)</label>
+          <input type="text" id="authPatientId" class="form-input" placeholder="e.g. PH_LOCAL_0001" autocomplete="off" />
+          <small class="symptom-guide-status">You can change the patient ID later from the doctor dashboard.</small>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: UPLOAD REPORT -->
+  <div class="modal-backdrop" id="uploadModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Upload Digital Report or Prescription</h3>
+        <button class="close-btn" onclick="closeModal('uploadModal')"><i data-lucide="x"></i></button>
+      </div>
+      <form onsubmit="handleUploadSubmit(event)">
+        <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+          <i data-lucide="upload-cloud" style="width:36px; height:36px; color:var(--primary); margin:0 auto;"></i>
+          <p><strong>Choose a file name (the file itself is not uploaded)</strong></p>
+          <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelected(this)" />
+          <div id="selectedFileName" style="margin-top:0.5rem; font-weight:700; color:var(--primary);"></div>
+          <small>The file itself stays on your device and is not uploaded or saved.</small>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Document Title</label>
+          <input type="text" id="recTitle" class="form-input" placeholder="e.g. Lipid Profile, 2D Echo, Blood Sugar" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="recCategory" class="form-select" required onchange="updateReadingFields()">
+            <option value="Cardiac">Cardiac Problem</option>
+            <option value="Sugar">Blood Sugar / Diabetes</option>
+            <option value="BP">Blood Pressure</option>
+            <option value="Ortho">Orthopedic</option>
+            <option value="General">General / Routine</option>
+          </select>
+        </div>
+        <div class="form-group reading-fields" id="glucoseReadingFields" hidden>
+          <label class="form-label" for="recGlucose">Blood glucose (mg/dL), if listed on your report</label>
+          <input type="number" id="recGlucose" class="form-input" min="0.1" step="any" placeholder="Enter the reported value" />
+        </div>
+        <div class="reading-fields" id="pressureReadingFields" hidden>
+          <div class="form-group">
+            <label class="form-label" for="recSystolic">Systolic blood pressure (mmHg)</label>
+            <input type="number" id="recSystolic" class="form-input" min="0.1" step="any" placeholder="Enter the reported value" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="recDiastolic">Diastolic blood pressure (mmHg)</label>
+            <input type="number" id="recDiastolic" class="form-input" min="0.1" step="any" placeholder="Enter the reported value" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Doctor / Hospital Name</label>
+          <input type="text" id="recDoctor" class="form-input" placeholder="e.g. Dr. Mukherjee, Apollo Clinic" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Clinical Observations & Findings</label>
+          <textarea id="recNotes" rows="3" class="form-textarea" placeholder="Key numbers, conclusion, medical notes..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Record Date</label>
+          <input type="date" id="recDate" class="form-input" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save to Digital History</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD MEDICINE -->
+  <div class="modal-backdrop" id="addMedModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Medicine Entry</h3>
+        <button class="close-btn" onclick="closeModal('addMedModal')"><i data-lucide="x"></i></button>
+      </div>
+      <form onsubmit="handleMedSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Medicine Name & Strength</label>
+          <input type="text" id="medName" class="form-input" placeholder="Enter a medicine name from your own records" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Condition</label>
+          <select id="medCondition" class="form-select">
+            <option value="BP">Blood Pressure</option>
+            <option value="Sugar">Blood Sugar</option>
+            <option value="Cardiac">Cardiac Issue</option>
+            <option value="Ortho">Orthopedic</option>
+            <option value="General">Other Past Illness</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Medication Timeline</label>
+          <select id="medStatus" class="form-select">
+            <option value="active">Currently Taking (Active)</option>
+            <option value="past">Previously Taken (Past Disease)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dosage & Frequency</label>
+          <input type="text" id="medDosage" class="form-input" placeholder="Enter details from a clinician's instructions" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Prescribing Doctor</label>
+          <input type="text" id="medDoc" class="form-input" placeholder="e.g. Dr. Sen" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save Medicine</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: SUMMARY -->
+  <div class="modal-backdrop" id="summaryModal">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3>Doctor Consultation Brief</h3>
+        <button class="close-btn" onclick="closeModal('summaryModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="summary-box" id="summaryContent"></div>
+      <div style="display:flex; justify-content: flex-end; gap:0.75rem; margin-top:1rem;">
+        <button class="btn btn-outline" onclick="window.print()"><i data-lucide="printer"></i> Print</button>
+        <button class="btn btn-primary" onclick="closeModal('summaryModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SYMPTOM GUIDE -->
+  <div class="modal-backdrop" id="symptomGuideModal">
+    <section class="modal-card symptom-guide-card" role="dialog" aria-modal="true" aria-labelledby="symptomGuideTitle">
+      <div class="modal-header">
+        <h3 id="symptomGuideTitle"><i data-lucide="sparkles"></i> MediCare+ Health Assistant</h3>
+        <button class="close-btn" onclick="closeModal('symptomGuideModal')" aria-label="Close symptom guide"><i data-lucide="x"></i></button>
+      </div>
+      <p class="symptom-guide-intro">Describe a health concern for general self-care ideas matched to common symptoms and signs for when to seek professional help.</p>
+      <p class="assistant-legal-note">Local rule-based demo — not AI, a diagnosis, or medical advice.</p>
+      <form id="symptomGuideForm">
+        <div class="form-group">
+          <label class="form-label" for="symptomInput">Describe the problem, when it began, and how it is changing</label>
+          <textarea id="symptomInput" class="form-textarea" rows="4" maxlength="1000" placeholder="For example: I've had a cough and fever since yesterday..." required></textarea>
+        </div>
+        <div class="symptom-guide-actions">
+          <button id="symptomMicBtn" class="btn btn-outline" type="button"><i data-lucide="mic"></i><span>Speak symptoms</span></button>
+          <button class="btn btn-primary" type="submit"><i data-lucide="send"></i> Ask for general guidance</button>
+        </div>
+      </form>
+      <p id="symptomGuideStatus" class="symptom-guide-status" aria-live="polite">Your typed description stays in this page. Speech recognition, if available, is handled by your browser and may use its own service.</p>
+      <section id="symptomGuideResponse" class="symptom-guide-response" aria-live="polite" hidden>
+        <h4 id="symptomGuideResponseTitle"></h4>
+        <p id="symptomGuideResponseText"></p>
+        <ul id="symptomGuideResponseSteps"></ul>
+        <p class="symptom-guide-followup"><strong>Useful details to note:</strong> when it began, how severe it feels, whether it is changing, and any relevant health conditions or medicines. Share these with a healthcare professional.</p>
+      </section>
+    </section>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
